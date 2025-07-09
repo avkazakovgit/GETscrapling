@@ -3,3 +3,4 @@
 .RData
 .Rproj.user/
 man/*.Rd
+.DS_Store
