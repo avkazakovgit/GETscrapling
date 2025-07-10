@@ -21,6 +21,7 @@
 #' @import tidyjson
 #' @import rjson
 #' @import DBI
+#' @import RSQLite
 .onLoad <- function( libname ,  pkgname ) {
 
   # 1) Tell reticulate which Python to use:
