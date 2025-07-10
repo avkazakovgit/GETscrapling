@@ -2,6 +2,9 @@ DB_crawlRUN          =    function(  db_con                            ,
                                      batch_size   =  20                ,
                                      sleep        =  5                 ,
 
+                                     tab_queue     =   'tab_queue'     ,
+                                     tab_crawl     =   'tab_crawl'     ,
+
                                          get_func  =  GETscrapling      ,
                                      success_func  =  craw_crawSuccess  ,
                                       status_func  =  craw_crawStatus   ,
@@ -18,8 +21,10 @@ DB_crawlRUN          =    function(  db_con                            ,
 
       batch_inputs  =
       DB_getInputs            (    db_con      =    db_con     ,
-                                     get_N       =    batch_size ,
-                                     tab_queue   =    tab_queue     )
+                                     get_N     =    batch_size ,
+                                     tab_queue =    tab_queue  ,
+                                     update    =    TRUE       ,
+                                     order_by  =    'default'    )
       if ( ! nzlen( batch_inputs ) ) {  message( 'No more pending URLs – exiting!' )
         break
       }
