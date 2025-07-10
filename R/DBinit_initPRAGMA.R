@@ -24,18 +24,12 @@ DBinit_initPRAGMA <- function(  db_con,
 
   assert_that( DBI::dbIsValid( db_con  ), is.character(pragmas), length(pragmas) > 0,  msg = "`pragmas` must be a named character vector of settings." )
 
-  DBI::dbWithTransaction( db_con , {
+  purrr::walk( pragmas, ~ {
 
-    purrr::imap(pragmas, function(value, name) {
+    sql <- glue::glue("PRAGMA {.x};")
 
-      sql <- glue::glue_sql(
-        "PRAGMA {`name`} = {value};",
-        .con = db_con
-      )
+    DBI::dbExecute( con , sql )
 
-      DBI::dbExecute(  db_con  , sql  )
-
-    })
   })
 
   invisible(NULL)
